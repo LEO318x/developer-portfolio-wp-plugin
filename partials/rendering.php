@@ -50,25 +50,30 @@ function atc_dp_render_portfolio_tags($printTags = true)
 
 	$tagsContent .= "<p class='atc_dp_portfolio-tags'>";
 //	$tagsContent .= "<span class='portfolio-tags-title'>Languages & Technologies</span><br>";
+	$tagsContent .= "<table class='border-table'><tbody><tr><td class='border-table'>Platforms</td>";
 	$platforms = get_the_terms($post, 'atc_dp_platforms');
 	if (!empty($platforms))
 	{
 		foreach ($platforms as $platform)
-			$tagsContent .= "<span class='atc_dp_portfolio-tag atc_dp_portfolio-tag-platform'>$platform->name</span> ";
+			$tagsContent .= "<td class='border-table'><span class='atc_dp_portfolio-tag atc_dp_portfolio-tag-platform'>$platform->name</span></td></tr> ";
 	}
 
 	$projectURL = get_post_meta($post->ID, 'atc_dp_project_URL');
 	if (!empty($projectURL))
 	{
-		$tagsContent .= "<br><a class='atc_dp_portfolio-tag atc_dp_portfolio-tag-projecturl' href='$projectURL[0]'>$projectURL[0]</a>";
+		$tagsContent .= "<tr><td class='border-table'>Project URL</td>";
+		$tagsContent .= "<td class='border-table'><a class='atc_dp_portfolio-tag atc_dp_portfolio-tag-projecturl' href='$projectURL[0]'>$projectURL[0]</a></td></tr>";
 	}
 	// Append the langiages tags
 	$languages = get_the_terms($post, 'atc_dp_languages');
 	if (!empty($languages))
 	{
-		$tagsContent .= "<br>";
-		foreach ($languages as $language)
-			$tagsContent .= "<span class='atc_dp_portfolio-tag atc_dp_portfolio-tag-language'>$language->name</span> ";
+		//$tagsContent .= "<br>";
+		$tagsContent .= "<tr><td class='border-table'>Programming Languages</td><td class='border-table'>";
+		foreach ($languages as $language){
+			$tagsContent .= "&nbsp;&nbsp;&nbsp;<span class='atc_dp_portfolio-tag atc_dp_portfolio-tag-language'>$language->name</span>";
+		}
+		$tagsContent .="</td></tr>";
 	}
 //	$tagsContent .= "</p>";
 
@@ -79,15 +84,17 @@ function atc_dp_render_portfolio_tags($printTags = true)
 	$tools = get_the_terms($post, 'atc_dp_tools');
 	if (!empty($tools))
 	{
-		$tagsContent .= "<br>";
+		$tagsContent .= "<tr><td class='border-table'>Tools & Technologies</td><td class='border-table'>";
 //		$tagsContent .= "<span class='portfolio-tags-title'>Technologies</span><br>";
-		foreach ($tools as $tool)
-			$tagsContent .= "<span class='atc_dp_portfolio-tag atc_dp_portfolio-tag-tools'>$tool->name</span> ";
+		foreach ($tools as $tool){
+			$tagsContent .= "&nbsp;&nbsp;&nbsp;<span class='atc_dp_portfolio-tag atc_dp_portfolio-tag-tools'>$tool->name</span> ";
+		}
+		$tagsContent .= "</td></tr>";
 	}
 
 
 
-	$tagsContent .= "</p></div>";
+	$tagsContent .= "</tbody></table></p></div>";
 
 
 
