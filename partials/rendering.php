@@ -54,9 +54,11 @@ function atc_dp_render_portfolio_tags($printTags = true)
 	$platforms = get_the_terms($post, 'atc_dp_platforms');
 	if (!empty($platforms))
 	{
+			$tagsContent .= "<td class='border-table'>";
 		foreach ($platforms as $platform)
-			$tagsContent .= "<td class='border-table'><span class='atc_dp_portfolio-tag atc_dp_portfolio-tag-platform'>$platform->name</span></td></tr> ";
+			$tagsContent .= "&nbsp;&nbsp;&nbsp;<span class='atc_dp_portfolio-tag atc_dp_portfolio-tag-platform'>$platform->name</span>";
 	}
+			$tagsContent .= "</td></tr>";
 
 	$projectURL = get_post_meta($post->ID, 'atc_dp_project_URL');
 	if (!empty($projectURL))
